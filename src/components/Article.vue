@@ -13,7 +13,7 @@
        <div v-html="content"></div>
     
     </div>
-    <div class="replies">
+    <div class="replies" v-if="list.replies.length > 0">
       <p>{{list.replies.length}}回复</p>
       <ul>
         <li v-for="(replay,index) in list.replies" :key="replay.index">
