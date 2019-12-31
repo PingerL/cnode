@@ -7,7 +7,7 @@
       v-for="btn in pagebtns"
       :key="btn.index"
       @click="changeBtn(btn)"
-      :class="[{currentPage:btn == currentPage},'pagebtn']"
+      :class="[{ currentPage: btn == currentPage }, 'pagebtn']"
     >{{btn}}</button>
     <button @click="changeBtn">下一页</button>
   </div>
@@ -27,8 +27,11 @@ export default {
   },
   methods: {
     changeBtn(page) {
+      console.log('124')
+      console.log(page)
       //点击上一页，下一页,首页
       if (typeof page != "number") {
+        console.log(34,page.target.innerText)
         switch (page.target.innerText) {
           case "上一页":
             $("button.currentPage")
@@ -80,6 +83,7 @@ export default {
   border-radius: 5px;
   /*box-shadow: 0px 2px 9px #888888;*/
   border: 1px solid #888888;
+  text-align: center
 }
 
 button {
