@@ -78,14 +78,14 @@ export default {
     margin: 0 auto;
     width: 1137px;
     background-color: #fff;
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
   }
   .header {
     line-height: 40px;
     font-size: 14px;
   }
   .uerinfo {
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
     color: #778087;
     padding: 10px;
   }

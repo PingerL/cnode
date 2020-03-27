@@ -93,15 +93,16 @@
       <div class="load-container" v-if="isLoading">
         <div class="boxLoading"></div>
       </div>
-      <div class="header clearfix" v-if="!isLoading">
+     
+      <ul class="topic_list">
+         <li class="header clearfix" v-if="!isLoading">
         <a href="#" @click="changeTab" class="active">全部</a>
         <a href="#" @click="changeTab">精华</a>
         <a href="#" @click="changeTab">分享</a>
         <a href="#" @click="changeTab">问答</a>
         <a href="#" @click="changeTab">招聘</a>
         <a href="#">客户端测试</a>
-      </div>
-      <ul class="topic_list">
+      </li>
         <li v-for="post in posts" :key="post.id">
           <router-link :to="{name:'post_User',params:{loginname:post.author.loginname}}">
             <img :src="post.author.avatar_url" alt />
@@ -289,10 +290,10 @@ a:hover {
   margin-right: 365px;
 }
 .content .header {
-  padding: 10px;
+  padding:0 10px;
   background-color: #f6f6f6;
   border-radius: 3px 3px 0 0;
-  height: 40px;
+  height: 53px;
 }
 .content .header a {
   color: #80bd01;

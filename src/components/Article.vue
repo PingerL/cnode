@@ -1,8 +1,8 @@
 <template>
   <div class="article">
-    <!-- <div class="load-container" v-if="true">
+    <div class="load-container" v-if="isLoading">
       <div class="boxLoading">123</div>
-    </div> -->
+    </div>
     <div class="topic-title" >
       <p>{{list.title}}</p>
       <ul class="clearfix">
@@ -36,7 +36,7 @@ export default {
     return {
       list: {},
       content: "",
-      isLoading: true
+      isLoading: false
     };
   },
   methods: {
@@ -44,7 +44,7 @@ export default {
       this.$http
         .get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
         .then(res => {
-          // this.isLoading = false;
+          this.isLoading = false;
           this.list = res.data.data;
           this.content = this.list.content.replace(
             'class="markdown-text"',
