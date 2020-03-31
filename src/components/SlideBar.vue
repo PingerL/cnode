@@ -11,16 +11,20 @@
     <div class="recent_topics">
       <div class="topbar">作者最近主题</div>
       <ul>
-        <li v-for="list in userinfo.recent_topics.slice(0,5)" :key="list.index">
+        <li
+          v-for="list in userinfo.recent_topics.slice(0, 5)"
+          :key="list.index"
+        >
           <router-link
             :to="{
-        name:'post_content',
-        params:{
-          id:list.id,
-          name:list.author.loginname
-        }
-        }"
-          >{{list.title}}</router-link>
+              name: 'post_content',
+              params: {
+                id: list.id,
+                name: list.author.loginname
+              }
+            }"
+            >{{ list.title }}</router-link
+          >
         </li>
       </ul>
     </div>
@@ -30,13 +34,14 @@
         <li v-for="list in replylimitby5" :key="list.index">
           <router-link
             :to="{
-        name:'post_content',
-        params:{
-          id:list.id,
-          name:list.author.loginname
-        }
-        }"
-          >{{list.title}}</router-link>
+              name: 'post_content',
+              params: {
+                id: list.id,
+                name: list.author.loginname
+              }
+            }"
+            >{{ list.title }}</router-link
+          >
         </li>
       </ul>
     </div>

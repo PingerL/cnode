@@ -21,9 +21,9 @@
         <li v-for="(replay,index) in list.replies" :key="replay.index">
           <router-link :to="{name:'post_User',params:{loginname:replay.author.loginname}}">
             <img :src="replay.author.avatar_url" alt />
-            <span>{{replay.author.loginname}}</span>
+            <span style="margin:10px;color:#666">{{replay.author.loginname}}</span>
           </router-link>
-          <span>{{index+1}}楼</span>
+          <span style="color:#0088cc">{{index+1}}楼</span>
           <div v-html="replay.content"></div>
         </li>
       </ul>
@@ -121,10 +121,9 @@ export default {
   min-width: 200px;
   max-width: 980px;
   margin: 0 auto;
-  padding: 45px;
 }
 a {
-  color: #0088cc;
+  color:#0088cc;  
 }
 .load-container {
   position: relative;

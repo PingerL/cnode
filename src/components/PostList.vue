@@ -54,19 +54,25 @@
           <ol class="friendship-community">
             <li>
               <a href="https://ruby-china.org/" target="_blank">
-                <img src="//static2.cnodejs.org/public/images/ruby-china-20150529.png" />
+                <img
+                  src="//static2.cnodejs.org/public/images/ruby-china-20150529.png"
+                />
               </a>
             </li>
             <div class="sep10"></div>
             <li>
               <a href="http://golangtc.com/" target="_blank">
-                <img src="//static2.cnodejs.org/public/images/golangtc-logo.png" />
+                <img
+                  src="//static2.cnodejs.org/public/images/golangtc-logo.png"
+                />
               </a>
             </li>
             <div class="sep10"></div>
             <li>
               <a href="http://phphub.org/" target="_blank">
-                <img src="//static2.cnodejs.org/public/images/phphub-logo.png" />
+                <img
+                  src="//static2.cnodejs.org/public/images/phphub-logo.png"
+                />
               </a>
             </li>
             <div class="sep10"></div>
@@ -83,9 +89,16 @@
           <span class="col_fade">客户端二维码</span>
         </div>
         <div class="inner cnode-app-download">
-          <img width="200" src="//static.cnodejs.org/FtG0YVgQ6iginiLpf9W4_ShjiLfU" />
+          <img
+            width="200"
+            src="//static.cnodejs.org/FtG0YVgQ6iginiLpf9W4_ShjiLfU"
+          />
           <br />
-          <a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
+          <a
+            href="https://github.com/soliury/noder-react-native"
+            target="_blank"
+            >客户端源码地址</a
+          >
         </div>
       </div>
     </div>
@@ -93,35 +106,53 @@
       <div class="load-container" v-if="isLoading">
         <div class="boxLoading"></div>
       </div>
-     
+
       <ul class="topic_list">
-         <li class="header clearfix" v-if="!isLoading">
-        <a href="#" @click="changeTab" class="active">全部</a>
-        <a href="#" @click="changeTab">精华</a>
-        <a href="#" @click="changeTab">分享</a>
-        <a href="#" @click="changeTab">问答</a>
-        <a href="#" @click="changeTab">招聘</a>
-        <a href="#">客户端测试</a>
-      </li>
+        <li class="header clearfix" v-if="!isLoading">
+          <a href="#" @click="changeTab" class="active">全部</a>
+          <a href="#" @click="changeTab">精华</a>
+          <a href="#" @click="changeTab">分享</a>
+          <a href="#" @click="changeTab">问答</a>
+          <a href="#" @click="changeTab">招聘</a>
+          <a href="#">客户端测试</a>
+        </li>
         <li v-for="post in posts" :key="post.id">
-          <router-link :to="{name:'post_User',params:{loginname:post.author.loginname}}">
+          <router-link
+            :to="{
+              name: 'post_User',
+              params: { loginname: post.author.loginname }
+            }"
+            class="a-img"
+          >
             <img :src="post.author.avatar_url" alt />
           </router-link>
+          <span style="width:50px; display:inline-block">
+            <span style="font-size:14px;color:#9e78c0">{{ post.reply_count }}</span>
+            <span style="font-size:10px;color:#b4b4b4">/{{ post.visit_count }}</span>
+          </span>
           <!--帖子的分类-->
           <span
-            :class="[{put_good:(post.good  == true),put_top:(post.top  == true),
-          'topiclist-tab':(post.good  != true && post.top  != true)}]"
+            :class="[
+              {
+                put_good: post.good == true,
+                put_top: post.top == true,
+                'topiclist-tab': post.good != true && post.top != true
+              }
+            ]"
           >
-            <span>{{post | tabFormatter}}</span>
+            <span>{{ post | tabFormatter }}</span>
           </span>
-          <span>{{post.reply_count}}</span>
-          <span>/{{post.visit_count}}</span>
+
           <!-- 标题 -->
           <router-link
-            :to="{name:'post_content',params:{id:post.id,name:post.author.loginname}}"
+            :to="{
+              name: 'post_content',
+              params: { id: post.id, name: post.author.loginname }
+            }"
             class="title"
-          >{{post.title}}</router-link>
-          <span class="last_time">{{post.last_reply_at | formatDate}}</span>
+            >{{ post.title }}</router-link
+          >
+          <span class="last_time">{{ post.last_reply_at | formatDate }}</span>
         </li>
         <!-- 分页 -->
         <li v-if="!isLoading">
@@ -151,7 +182,7 @@ export default {
           params: { page: this.postpage, limit: 20, tab: this.tab }
         })
         .then(res => {
-          this.isLoading = false
+          this.isLoading = false;
           this.posts = res.data.data;
           console.log(res.data.data);
         })
@@ -160,46 +191,48 @@ export default {
         });
     },
     renderList(value) {
-      console.log(value,'value')
+      console.log(value, "value");
       this.postpage = value;
       this.getData();
     },
-    changeStyle(aim){
-      console.log($(aim))
-      console.log($(aim).siblings())
-      $(aim).siblings().removeClass('active')
-      $(aim).addClass('active')
+    changeStyle(aim) {
+      console.log($(aim));
+      console.log($(aim).siblings());
+      $(aim)
+        .siblings()
+        .removeClass("active");
+      $(aim).addClass("active");
     },
-    changeTab(e){
-      console.log('changetab')
-      console.log(e.target.innerText)
-      let aim = e.target
-      switch(e.target.innerText){
+    changeTab(e) {
+      console.log("changetab");
+      console.log(e.target.innerText);
+      let aim = e.target;
+      switch (e.target.innerText) {
         case "全部":
-          this.tab = "all"
-          this.getData()
-          this.changeStyle(aim)  // 改变选中的菜单的样式
-          break
+          this.tab = "all";
+          this.getData();
+          this.changeStyle(aim); // 改变选中的菜单的样式
+          break;
         case "精华":
-          this.tab = "good"
-          this.getData()
-          this.changeStyle(aim)
-          break
+          this.tab = "good";
+          this.getData();
+          this.changeStyle(aim);
+          break;
         case "分享":
-          this.tab = "share"
-          this.getData()
-          this.changeStyle(aim)
-          break
+          this.tab = "share";
+          this.getData();
+          this.changeStyle(aim);
+          break;
         case "问答":
-          this.tab = "ask"
-          this.getData()
-          this.changeStyle(aim)
-          break
+          this.tab = "ask";
+          this.getData();
+          this.changeStyle(aim);
+          break;
         case "招聘":
-          this.tab = "job"
-          this.getData()
-          this.changeStyle(aim)  
-          break
+          this.tab = "job";
+          this.getData();
+          this.changeStyle(aim);
+          break;
       }
     }
   },
@@ -290,7 +323,7 @@ a:hover {
   margin-right: 365px;
 }
 .content .header {
-  padding:0 10px;
+  padding: 0 10px;
   background-color: #f6f6f6;
   border-radius: 3px 3px 0 0;
   height: 53px;
@@ -318,8 +351,14 @@ a:hover {
   position: relative;
 }
 
-.topic_list li img {
+.a-img {
+  display: inline-block;
   width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.topic_list li img {
+  width: 100%;
 }
 .put_good,
 .put_top {
@@ -351,6 +390,8 @@ a:hover {
   text-align: right;
   width: 50px;
 }
+
+/* loading 动画 */
 .load-container {
   position: relative;
   width: 100px;
