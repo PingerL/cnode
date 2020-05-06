@@ -114,7 +114,7 @@
           <a href="#" @click="changeTab">分享</a>
           <a href="#" @click="changeTab">问答</a>
           <a href="#" @click="changeTab">招聘</a>
-          <a href="#">客户端测试</a>
+          <a href="#" @click="changeTab">客户端测试</a>
         </li>
         <li v-for="post in posts" :key="post.id">
           <router-link
@@ -172,10 +172,11 @@ export default {
       isLoading: false,
       posts: {},
       postpage: 1,
-      tab: ""
+      tab: "all",
     };
   },
   methods: {
+  
     getData() {
       this.$http
         .get(" https://cnodejs.org/api/v1/topics", {
@@ -184,28 +185,29 @@ export default {
         .then(res => {
           this.isLoading = false;
           this.posts = res.data.data;
-          console.log(res.data.data);
+          window.scrollTo(0,0) 
+          // console.log(res.data.data);
         })
         .catch(err => {
-          console.log(err);
+          return err
         });
     },
     renderList(value) {
-      console.log(value, "value");
+      // console.log(value, "value");
       this.postpage = value;
-      this.getData();
+      this.getData()
     },
     changeStyle(aim) {
-      console.log($(aim));
-      console.log($(aim).siblings());
+      // console.log($(aim));
+      // console.log($(aim).siblings());
       $(aim)
         .siblings()
         .removeClass("active");
       $(aim).addClass("active");
     },
     changeTab(e) {
-      console.log("changetab");
-      console.log(e.target.innerText);
+      // console.log("changetab");
+      // console.log(e.target.innerText);
       let aim = e.target;
       switch (e.target.innerText) {
         case "全部":
@@ -230,6 +232,11 @@ export default {
           break;
         case "招聘":
           this.tab = "job";
+          this.getData();
+          this.changeStyle(aim);
+          break;
+        case "客户端测试":
+          this.tab = "dev";
           this.getData();
           this.changeStyle(aim);
           break;

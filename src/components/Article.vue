@@ -3,27 +3,34 @@
     <div class="load-container" v-if="isLoading">
       <div class="boxLoading">123</div>
     </div>
-    <div class="topic-title" >
-      <p>{{list.title}}</p>
+    <div class="topic-title">
+      <p>{{ list.title }}</p>
       <ul class="clearfix">
-        <li>• 发布于{{list.create_at | formatDate}}前</li>
-        <li>• 作者{{list.author.loginname}}</li>
-        <li>• {{list.visit_count}}浏览</li>
-        <li>• 来自{{list.author.loginname}}</li>
+        <li>• 发布于{{ list.create_at | formatDate }}前</li>
+        <li>• 作者{{ list.author.loginname }}</li>
+        <li>• {{ list.visit_count }}浏览</li>
+        <li>• 来自{{ list.author.loginname }}</li>
       </ul>
     </div>
     <div class="content">
       <div v-html="content"></div>
     </div>
     <div class="replies" v-if="list.replies.length > 0">
-      <p>{{list.replies.length}}回复</p>
+      <p>{{ list.replies.length }}回复</p>
       <ul>
-        <li v-for="(replay,index) in list.replies" :key="replay.index">
-          <router-link :to="{name:'post_User',params:{loginname:replay.author.loginname}}">
+        <li v-for="(replay, index) in list.replies" :key="replay.index">
+          <router-link
+            :to="{
+              name: 'post_User',
+              params: { loginname: replay.author.loginname }
+            }"
+          >
             <img :src="replay.author.avatar_url" alt />
-            <span style="margin:10px;color:#666">{{replay.author.loginname}}</span>
+            <span style="margin:10px;color:#666">{{
+              replay.author.loginname
+            }}</span>
           </router-link>
-          <span style="color:#0088cc">{{index+1}}楼</span>
+          <span style="color:#0088cc">{{ index + 1 }}楼</span>
           <div v-html="replay.content"></div>
         </li>
       </ul>
@@ -123,7 +130,7 @@ export default {
   margin: 0 auto;
 }
 a {
-  color:#0088cc;  
+  color: #0088cc;
 }
 .load-container {
   position: relative;
