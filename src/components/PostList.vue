@@ -175,6 +175,7 @@ export default {
       tab: "all",
     };
   },
+
   methods: {
   
     getData() {
@@ -186,7 +187,13 @@ export default {
           this.isLoading = false;
           this.posts = res.data.data;
           window.scrollTo(0,0) 
-          // console.log(res.data.data);
+          console.log(res.data.data);
+          res.data.data.forEach(data => {
+            
+            let keys = Object.keys(data)
+            let values = Object.values(data)
+            console.log(keys,values)
+          });
         })
         .catch(err => {
           return err
